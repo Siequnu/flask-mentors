@@ -20,7 +20,7 @@
  
  <h3>{{student.username}} currently has {{mentors|length}} mentors.</h3>
  
-<a href="{{url_for('user.search_for_mentors', student_id = student.id)}}" <button class="btn btn-secondary"><i class="fa fa-user-plus"></i> Add mentor</button></a> 
+<a href="{{url_for('mentors.search_for_mentors', student_id = student.id)}}" <button class="btn btn-secondary"><i class="fa fa-user-plus"></i> Add mentor</button></a> 
 {% for mentor in mentors %}
 <br /><br />
 

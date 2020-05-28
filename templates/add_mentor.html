@@ -43,7 +43,7 @@
             <tr>
               <td>{{mentor.username}}</td>
                <td>
-               <a href="{{url_for('user.add_mentor', student_id = student.id, mentor_id = mentor.id)}}" <button class="btn btn-secondary"><i class="fa fa-plus-circle"></i> Add as mentor</button>
+               <a href="{{url_for('mentors.add_mentor', student_id = student.id, mentor_id = mentor.id)}}" <button class="btn btn-secondary"><i class="fa fa-plus-circle"></i> Add as mentor</button>
 </a>
                </td>
             </tr>
