@@ -26,7 +26,21 @@ def search_for_mentors (student_id):
 			abort (403)
 		
 		# Filter out any current mentors
-		all_mentors = User.query.filter_by (is_admin = True).all()		
+		if current_user.is_superintendant:
+			all_mentors = User.query.filter_by (is_admin = True).all()
+		else:
+			# Only display mentors who are currently sharing at least one class
+			filtered_mentors = []
+			teacher_turmas = app.classes.models.get_teacher_classes_from_teacher_id (current_user.id)
+			all_mentors = User.query.filter_by (is_admin = True).all()
+			for mentor in all_mentors:
+				for turma in teacher_turmas:
+					if app.classes.models.check_if_turma_id_belongs_to_a_teacher (turma.id, mentor.id) is True:
+						filtered_mentors.append (mentor)
+			
+			# Overwrite main variable
+			all_mentors = filtered_mentors
+			
 		current_mentors = models.get_mentors_from_student_id (student_id)
 		mentors = list(set(all_mentors) - set (current_mentors))
 		
